@@ -55,6 +55,17 @@ class Index extends Component {
 
   componentDidHide () { }
 
+  onGotUserInfo (e) {
+    console.log(e)
+    Taro.login().then((r) => {
+      console.log(r)
+
+      Taro.getUserInfo().then((d) => {
+        console.log(d)
+      })
+    })
+  }
+
   onGoList () {
     console.log('s')
     Taro.navigateTo({
@@ -70,6 +81,10 @@ class Index extends Component {
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View><Text>{this.props.counter.num}</Text></View>
         <View onClick={ this.onGoList }><Text>World</Text></View>
+        <Button id='login-btn' openType="getUserInfo" 
+        lang="zh_CN" 
+        onGetUserInfo={this.onGotUserInfo} 
+        type='primary' >微信用户快速登录</Button>
       </View>
     )
   }
